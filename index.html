@@ -47,7 +47,7 @@ button {
 button:hover {
   background: #ff70c2;
 }
-.result, .wishes {
+.result, .wish-box {
   background: rgba(255,255,255,0.15);
   margin-top: 20px;
   padding: 15px;
@@ -68,9 +68,9 @@ footer {
   <p>輸入你的生肖與出生月份，看看你的五行能量密碼 ✨</p>
 
   <!-- 能量查詢表單 -->
-  <form method="get">
+  <form>
     <label>選擇生肖：</label>
-    <select name="zodiac" required>
+    <select required>
       <option value="">-- 請選擇 --</option>
       <option>鼠</option><option>牛</option><option>虎</option><option>兔</option>
       <option>龍</option><option>蛇</option><option>馬</option><option>羊</option>
@@ -78,7 +78,7 @@ footer {
     </select>
 
     <label>出生月份：</label>
-    <select name="month" required>
+    <select required>
       <option value="">-- 請選擇 --</option>
       <option>1</option><option>2</option><option>3</option><option>4</option>
       <option>5</option><option>6</option><option>7</option><option>8</option>
@@ -88,62 +88,21 @@ footer {
     <button type="submit">🔮 解鎖能量密碼</button>
   </form>
 
-  <!-- 結果區 -->
+  <!-- 結果展示 -->
   <div class="result">
-    <h2>你的能量結果：</h2>
-    <p>
-    <?php
-      $map = [
-        "鼠" => "水", "牛" => "土", "虎" => "木", "兔" => "木",
-        "龍" => "土", "蛇" => "火", "馬" => "火", "羊" => "土",
-        "猴" => "金", "雞" => "金", "狗" => "土", "豬" => "水"
-      ];
-      if (!empty($_GET['zodiac']) && !empty($_GET['month'])) {
-        $z = $_GET['zodiac'];
-        $m = intval($_GET['month']);
-        $wuxing = $map[$z];
-        $star = ["摩羯座","水瓶座","雙魚座","白羊座","金牛座","雙子座","巨蟹座","獅子座","處女座","天秤座","天蠍座","射手座"][$m-1];
-        echo "生肖：$z<br>五行：$wuxing<br>星座：$star<br>";
-
-        // 顯示簡易建議
-        $advice = [
-          "火" => "2026火旺年，宜穿綠色木衣，佩紅瑪瑙穩財運。",
-          "水" => "多親近大自然，喝黑豆水助運。",
-          "木" => "可佩紅色飾物，增加活力。",
-          "金" => "佩白水晶化煞，聲音淨化。",
-          "土" => "宜黃色系服飾，心境平和。"
-        ];
-        echo "<br><strong>流年建議：</strong>".$advice[$wuxing];
-      } else {
-        echo "請選擇上方選項後按『解鎖能量密碼』";
-      }
-    ?>
-    </p>
+    <h2>✨ 你的能量結果：</h2>
+    <p>五行、星座與建議會顯示在這裡。</p>
+    <p>此版本為靜態展示，如果你希望看到互動結果，我可以幫你轉成純前端 JS 版（無伺服器需求）。</p>
   </div>
 
-  <!-- 願望區 -->
-  <div class="wishes">
+  <!-- 許願牆 -->
+  <div class="wish-box">
     <h2>🪄 許願牆</h2>
-    <form method="post">
-      <input type="text" name="wish" placeholder="輸入你的願望..." required>
+    <form>
+      <input type="text" placeholder="輸入你的願望..." required>
       <button type="submit">💫 送出願望</button>
     </form>
-
-    <?php
-      if (!empty($_POST['wish'])) {
-        $wish = htmlspecialchars($_POST['wish']);
-        file_put_contents("wishes.txt", $wish.PHP_EOL, FILE_APPEND);
-      }
-
-      if (file_exists("wishes.txt")) {
-        echo "<h3>最新願望：</h3><ul>";
-        $wishes = array_reverse(file("wishes.txt"));
-        foreach (array_slice($wishes, 0, 5) as $w) {
-          echo "<li>".htmlspecialchars($w)."</li>";
-        }
-        echo "</ul>";
-      }
-    ?>
+    <p>願望已送出 🌟（此為示範效果，靜態頁面不會保存資料）</p>
   </div>
 
   <footer>© 2025 Energy Cosmos. Powered by Light & Flow.</footer>
