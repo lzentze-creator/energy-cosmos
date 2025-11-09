@@ -254,44 +254,52 @@
     resultDiv.scrollIntoView({ behavior: 'smooth' });
   }
 
-  // ✅ 修復後的許願功能
-  let wishCount = parseInt(localStorage.getItem('wishCount')) || 0;
+ // ✅ 修正版完整程式
+let wishCount = parseInt(localStorage.getItem('wishCount')) || 0;
+document.getElementById('energyCount').textContent = wishCount;
+
+function addWish() {
+  const text = document.getElementById('wishText').value.trim();
+  if (!text) {
+    alert(currentLang === 'zh' ? "請輸入願望內容！" : "Please enter your wish!");
+    return;
+  }
+
+  const list = document.getElementById('wishList');
+  const div = document.createElement('div');
+  div.className = 'wish';
+  div.textContent = text;
+  list.insertBefore(div, list.firstChild);
+
+  document.getElementById('wishText').value = '';
+  wishCount++;
   document.getElementById('energyCount').textContent = wishCount;
+  localStorage.setItem('wishCount', wishCount);
 
-  function addWish() {
-    const text = document.getElementById('wishText').value.trim();
-    if (!text) {
-      alert(currentLang === 'zh' ? "請輸入願望內容！" : "Please enter your wish!");
-      return;
-    }
-    const list = document.getElementById('wishList');
-    const div = document.createElement('div');
-    div.className = 'wish';
-    div.textContent = text;
-    list.insertBefore(div, list.firstChild);
-    document.getElementById('wishText').value = '';
-    wishCount++;
-    document.getElementById('energyCount').textContent = wishCount;
-    localStorage.setItem('wishCount', wishCount);
-    if (wishCount % 1000 === 0) {
-      alert(🎉 能量達 ${wishCount}！我們將為地球種下 ${wishCount/1000} 棵樹！);
-    }
+  if (wishCount % 1000 === 0) {
+    alert(🎉 能量達 ${wishCount}！我們將為地球種下 ${wishCount / 1000} 棵樹！);
   }
+}
 
-  // 分享
-  function share(platform) {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(currentLang === 'zh' ? "我解鎖了個人能量密碼！你也來試試？🌟 能量宇宙" : "I unlocked my energy code! Try it? 🌟 Energy Cosmos");
-    const links = {
-      facebook: https://www.facebook.com/sharer/sharer.php?u=${url},
-      twitter: https://twitter.com/intent/tweet?text=${text}&url=${url},
-      whatsapp: https://api.whatsapp.com/send?text=${text}%20${url}
-    };
-    window.open(links[platform], '_blank');
-  }
+// ✅ 分享功能修正
+function share(platform) {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent(
+    currentLang === 'zh'
+      ? "我解鎖了個人能量密碼！你也來試試？🌟 能量宇宙"
+      : "I unlocked my energy code! Try it? 🌟 Energy Cosmos"
+  );
+  const links = {
+    facebook: https://www.facebook.com/sharer/sharer.php?u=${url},
+    twitter: https://twitter.com/intent/tweet?text=${text}&url=${url},
+    whatsapp: https://api.whatsapp.com/send?text=${text}%20${url}
+  };
+  window.open(links[platform], '_blank');
+}
 
-  console.log('能量宇宙已啟動 🌌');
+console.log('能量宇宙已啟動 🌌');
 </script>
 
 </body>
 </html>
+
