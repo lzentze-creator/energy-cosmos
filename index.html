@@ -181,80 +181,80 @@
 </footer>
 
 <script>
-  // 多語言
-  const texts = {
-    zh: {
-      engineTitle: "🌟 個人能量配對引擎",
-      engineDesc: "輸入生肖 + 出生月份，解鎖你的五行、星座、元素與開運密碼！",
-      resultTemplate: (data) => `
-        <h3>✨ 你的能量密碼：${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
-        <p><strong>流年建議 (2026丙午年)：</strong> ${data.advice}</p>
-        <p>🎨 <strong>幸運色：</strong> ${data.color}</p>
-        <p>🔢 <strong>幸運數字：</strong> ${data.number}</p>
-        <p>💎 <strong>能量水晶：</strong> ${data.crystal}</p>
-        <p>🌱 <strong>除負能量法：</strong> ${data.cleanse}</p>
-      `
-    },
-    en: {
-      engineTitle: "🌟 Personal Energy Matching Engine",
-      engineDesc: "Enter your Chinese Zodiac + Birth Month to unlock your Five Elements, Constellation, Element & Luck Code!",
-      resultTemplate: (data) => `
-        <h3>✨ Your Energy Code: ${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
-        <p><strong>2026 Flow Year Advice:</strong> ${data.advice}</p>
-        <p>🎨 <strong>Lucky Color:</strong> ${data.color}</p>
-        <p>🔢 <strong>Lucky Number:</strong> ${data.number}</p>
-        <p>💎 <strong>Energy Crystal:</strong> ${data.crystal}</p>
-        <p>🌱 <strong>Clear Negative Energy:</strong> ${data.cleanse}</p>
-      `
-    }
-  };
-
-  let currentLang = 'zh';
-  function switchLang(lang) {
-    currentLang = lang;
-    document.getElementById('engine-title').textContent = texts[lang].engineTitle;
-    document.getElementById('engine-desc').textContent = texts[lang].engineDesc;
-    const result = document.getElementById('result');
-    if (result.style.display === 'block') generateEnergy();
+// 多語言
+const texts = {
+  zh: {
+    engineTitle: "🌟 個人能量配對引擎",
+    engineDesc: "輸入生肖 + 出生月份，解鎖你的五行、星座、元素與開運密碼！",
+    resultTemplate: (data) => `
+      <h3>✨ 你的能量密碼：${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
+      <p><strong>流年建議 (2026丙午年)：</strong> ${data.advice}</p>
+      <p>🎨 <strong>幸運色：</strong> ${data.color}</p>
+      <p>🔢 <strong>幸運數字：</strong> ${data.number}</p>
+      <p>💎 <strong>能量水晶：</strong> ${data.crystal}</p>
+      <p>🌱 <strong>除負能量法：</strong> ${data.cleanse}</p>
+    `
+  },
+  en: {
+    engineTitle: "🌟 Personal Energy Matching Engine",
+    engineDesc: "Enter your Chinese Zodiac + Birth Month to unlock your Five Elements, Constellation, Element & Luck Code!",
+    resultTemplate: (data) => `
+      <h3>✨ Your Energy Code: ${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
+      <p><strong>2026 Flow Year Advice:</strong> ${data.advice}</p>
+      <p>🎨 <strong>Lucky Color:</strong> ${data.color}</p>
+      <p>🔢 <strong>Lucky Number:</strong> ${data.number}</p>
+      <p>💎 <strong>Energy Crystal:</strong> ${data.crystal}</p>
+      <p>🌱 <strong>Clear Negative Energy:</strong> ${data.cleanse}</p>
+    `
   }
+};
 
-  const wuxingMap = { 鼠: "水", 牛: "土", 虎: "木", 兔: "木", 龍: "土", 蛇: "火", 馬: "火", 羊: "土", 猴: "金", 雞: "金", 狗: "土", 豬: "水" };
-  const starMap = ["摩羯座","水瓶座","雙魚座","白羊座","金牛座","雙子座","巨蟹座","獅子座","處女座","天秤座","天蠍座","射手座"];
-  const elementMap = ["土","風","水","火"];
-  const energyDB = {
-    advice:{火:"2026火旺年，宜穿綠色木衣，佩黃水晶穩財運",水:"補木生水，多去森林浴，喝黑豆水",木:"火年助木，宜紅色配飾，但忌過量",金:"火克金，佩黑曜石化煞，多喝湯水",土:"火生土，穩定年，宜黃色系"},
-    color:{火:"紅橙",水:"黑藍",木:"綠",金:"白金",土:"黃棕"},
-    number:{火:"3,8",水:"1,6",木:"3,4",金:"4,9",土:"2,5,8"},
-    crystal:{火:"紅瑪瑙",水:"黑曜石",木:"綠幽靈",金:"白水晶",土:"黃水晶"},
-    cleanse:{火:"點肉桂香薰，燒許願紙",水:"鹽水淨浴，每週一次",木:"艾草熏房，開窗透氣",金:"敲金屬鈴，聲音淨化",土:"放鹽燈，吸收濕氣負能"}
-  };
+let currentLang = 'zh';
+function switchLang(lang) {
+  currentLang = lang;
+  document.getElementById('engine-title').textContent = texts[lang].engineTitle;
+  document.getElementById('engine-desc').textContent = texts[lang].engineDesc;
+  const result = document.getElementById('result');
+  if (result.style.display === 'block') generateEnergy();
+}
 
-  function generateEnergy() {
-    const zodiac = document.getElementById('zodiac').value;
-    const month = document.getElementById('month').value;
-    if (!zodiac || !month) {
-      alert(currentLang==='zh'?"請選擇生肖與出生月份！":"Please select zodiac and birth month!");
-      return;
-    }
-    const wuxing = wuxingMap[zodiac];
-    const star = starMap[parseInt(month)-1];
-    const elementIdx = "火水木金土".indexOf(wuxing);
-    const element = elementMap[elementIdx % 4] || '未知';
-    const data = {
-      zodiac, star, wuxing, element,
-      advice: energyDB.advice[wuxing] || '通用建議：多冥想平衡能量',
-      color: energyDB.color[wuxing] || '藍色',
-      number: energyDB.number[wuxing] || '1',
-      crystal: energyDB.crystal[wuxing] || '白水晶',
-      cleanse: energyDB.cleanse[wuxing] || '深呼吸放鬆'
-    };
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = texts[currentLang].resultTemplate(data);
-    resultDiv.style.display = 'block';
-    resultDiv.scrollIntoView({ behavior: 'smooth' });
+const wuxingMap = { 鼠: "水", 牛: "土", 虎: "木", 兔: "木", 龍: "土", 蛇: "火", 馬: "火", 羊: "土", 猴: "金", 雞: "金", 狗: "土", 豬: "水" };
+const starMap = ["摩羯座","水瓶座","雙魚座","白羊座","金牛座","雙子座","巨蟹座","獅子座","處女座","天秤座","天蠍座","射手座"];
+const elementMap = ["土","風","水","火"];
+const energyDB = {
+  advice:{火:"2026火旺年，宜穿綠色木衣，佩黃水晶穩財運",水:"補木生水，多去森林浴，喝黑豆水",木:"火年助木，宜紅色配飾，但忌過量",金:"火克金，佩黑曜石化煞，多喝湯水",土:"火生土，穩定年，宜黃色系"},
+  color:{火:"紅橙",水:"黑藍",木:"綠",金:"白金",土:"黃棕"},
+  number:{火:"3,8",水:"1,6",木:"3,4",金:"4,9",土:"2,5,8"},
+  crystal:{火:"紅瑪瑙",水:"黑曜石",木:"綠幽靈",金:"白水晶",土:"黃水晶"},
+  cleanse:{火:"點肉桂香薰，燒許願紙",水:"鹽水淨浴，每週一次",木:"艾草熏房，開窗透氣",金:"敲金屬鈴，聲音淨化",土:"放鹽燈，吸收濕氣負能"}
+};
+
+function generateEnergy() {
+  const zodiac = document.getElementById('zodiac').value;
+  const month = document.getElementById('month').value;
+  if (!zodiac || !month) {
+    alert(currentLang==='zh'?"請選擇生肖與出生月份！":"Please select zodiac and birth month!");
+    return;
   }
+  const wuxing = wuxingMap[zodiac];
+  const star = starMap[parseInt(month)-1];
+  const elementIdx = "火水木金土".indexOf(wuxing);
+  const element = elementMap[elementIdx % 4] || '未知';
+  const data = {
+    zodiac, star, wuxing, element,
+    advice: energyDB.advice[wuxing] || '通用建議：多冥想平衡能量',
+    color: energyDB.color[wuxing] || '藍色',
+    number: energyDB.number[wuxing] || '1',
+    crystal: energyDB.crystal[wuxing] || '白水晶',
+    cleanse: energyDB.cleanse[wuxing] || '深呼吸放鬆'
+  };
+  const resultDiv = document.getElementById('result');
+  resultDiv.innerHTML = texts[currentLang].resultTemplate(data);
+  resultDiv.style.display = 'block';
+  resultDiv.scrollIntoView({ behavior: 'smooth' });
+}
 
- // ✅ 修正版完整程式
+// ✅ 修復後的許願功能
 let wishCount = parseInt(localStorage.getItem('wishCount')) || 0;
 document.getElementById('energyCount').textContent = wishCount;
 
@@ -302,4 +302,5 @@ console.log('能量宇宙已啟動 🌌');
 
 </body>
 </html>
+
 
