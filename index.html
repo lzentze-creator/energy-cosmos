@@ -294,31 +294,32 @@
   }
 
   // 許願牆
-  let wishCount = localStorage.getItem('wishCount') || 0; // 記住計數
-  document.getElementById('energyCount').textContent = wishCount;
-  function addWish() {
-    const text = document.getElementById('wishText').value.trim();
-    if (!text) {
-      alert('請輸入願望！');
-      return;
-    }
+let wishCount = parseInt(localStorage.getItem('wishCount')) || 0;
+document.getElementById('energyCount').textContent = wishCount;
 
-    const list = document.getElementById('wishList');
-    const div = document.createElement('div');
-    div.className = 'wish';
-    div.innerHTML = 🌟 ${text}; // 用 innerHTML 加 emoji
-    list.insertBefore(div, list.firstChild);
-
-    document.getElementById('wishText').value = '';
-    wishCount++;
-    document.getElementById('energyCount').textContent = wishCount;
-    localStorage.setItem('wishCount', wishCount);
-
-    if (wishCount % 1000 === 0) {
-      alert(🎉 能量達 ${wishCount}！我們將為地球種下 ${wishCount/1000} 棵樹！);
-    }
+function addWish() {
+  const text = document.getElementById('wishText').value.trim();
+  if (!text) {
+    alert(currentLang === 'zh' ? "請輸入願望內容！" : "Please enter your wish!");
+    return;
   }
 
+  const list = document.getElementById('wishList');
+  const div = document.createElement('div');
+  div.className = 'wish';
+  div.textContent = text;
+
+  list.insertBefore(div, list.firstChild);
+
+  document.getElementById('wishText').value = '';
+  wishCount++;
+  document.getElementById('energyCount').textContent = wishCount;
+  localStorage.setItem('wishCount', wishCount);
+
+  if (wishCount % 1000 === 0) {
+    alert(🎉 能量達 ${wishCount}！我們將為地球種下 ${wishCount/1000} 棵樹！);
+  }
+}
   // 分享
   function share(platform) {
     const url = encodeURIComponent(window.location.href);
@@ -342,4 +343,5 @@
 
 </body>
 </html>
+
 
