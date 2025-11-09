@@ -32,6 +32,7 @@
 
     header {
       text-align:center; padding:2rem 1rem; background:rgba(0,0,0,0.3);
+      position: relative;
     }
     h1 {
       font-family: 'Playfair Display', serif;
@@ -180,13 +181,7 @@
 </footer>
 
 <script>
-  // 錯誤處理：確保 JS 正常載入
-  window.onerror = function(msg, url, line) {
-    console.error('JS Error: ' + msg + ' at line ' + line);
-    alert('偵測到小錯誤，請重新載入頁面！');
-  };
-
-  // 多語言（修正：加 emoji 到模板，避免渲染問題）
+  // 多語言
   const texts = {
     zh: {
       engineTitle: "🌟 個人能量配對引擎",
@@ -220,63 +215,31 @@
     document.getElementById('engine-title').textContent = texts[lang].engineTitle;
     document.getElementById('engine-desc').textContent = texts[lang].engineDesc;
     const result = document.getElementById('result');
-    if (result.style.display === 'block') generateEnergy(); // 重新生成結果
+    if (result.style.display === 'block') generateEnergy();
   }
 
-  // 生肖對應五行
-  const wuxingMap = {
-    鼠: "水", 牛: "土", 虎: "木", 兔: "木", 龍: "土", 蛇: "火",
-    馬: "火", 羊: "土", 猴: "金", 雞: "金", 狗: "土", 豬: "水"
-  };
-
-  // 星座對應
-  const starMap = [
-    "摩羯座", "水瓶座", "雙魚座", "白羊座", "金牛座", "雙子座",
-    "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座"
-  ];
-
-  // 四元素
-  const elementMap = ["土", "風", "水", "火"];
-
-  // 能量資料庫
+  const wuxingMap = { 鼠: "水", 牛: "土", 虎: "木", 兔: "木", 龍: "土", 蛇: "火", 馬: "火", 羊: "土", 猴: "金", 雞: "金", 狗: "土", 豬: "水" };
+  const starMap = ["摩羯座","水瓶座","雙魚座","白羊座","金牛座","雙子座","巨蟹座","獅子座","處女座","天秤座","天蠍座","射手座"];
+  const elementMap = ["土","風","水","火"];
   const energyDB = {
-    advice: {
-      火: "2026火旺年，宜穿綠色木衣，佩黃水晶穩財運",
-      水: "補木生水，多去森林浴，喝黑豆水",
-      木: "火年助木，宜紅色配飾，但忌過量",
-      金: "火克金，佩黑曜石化煞，多喝湯水",
-      土: "火生土，穩定年，宜黃色系"
-    },
-    color: { 火:"紅橙", 水:"黑藍", 木:"綠", 金:"白金", 土:"黃棕" },
-    number: { 火:"3,8", 水:"1,6", 木:"3,4", 金:"4,9", 土:"2,5,8" },
-    crystal: { 火:"紅瑪瑙", 水:"黑曜石", 木:"綠幽靈", 金:"白水晶", 土:"黃水晶" },
-    cleanse: {
-      火: "點肉桂香薰，燒許願紙",
-      水: "鹽水淨浴，每週一次",
-      木: "艾草熏房，開窗透氣",
-      金: "敲金屬鈴，聲音淨化",
-      土: "放鹽燈，吸收濕氣負能"
-    }
+    advice:{火:"2026火旺年，宜穿綠色木衣，佩黃水晶穩財運",水:"補木生水，多去森林浴，喝黑豆水",木:"火年助木，宜紅色配飾，但忌過量",金:"火克金，佩黑曜石化煞，多喝湯水",土:"火生土，穩定年，宜黃色系"},
+    color:{火:"紅橙",水:"黑藍",木:"綠",金:"白金",土:"黃棕"},
+    number:{火:"3,8",水:"1,6",木:"3,4",金:"4,9",土:"2,5,8"},
+    crystal:{火:"紅瑪瑙",水:"黑曜石",木:"綠幽靈",金:"白水晶",土:"黃水晶"},
+    cleanse:{火:"點肉桂香薰，燒許願紙",水:"鹽水淨浴，每週一次",木:"艾草熏房，開窗透氣",金:"敲金屬鈴，聲音淨化",土:"放鹽燈，吸收濕氣負能"}
   };
 
   function generateEnergy() {
-    console.log('生成能量中...'); // Debug 日誌
     const zodiac = document.getElementById('zodiac').value;
     const month = document.getElementById('month').value;
     if (!zodiac || !month) {
       alert(currentLang==='zh'?"請選擇生肖與出生月份！":"Please select zodiac and birth month!");
       return;
     }
-
     const wuxing = wuxingMap[zodiac];
-    if (!wuxing) {
-      alert('生肖資料錯誤，請重新選擇！');
-      return;
-    }
-    const star = starMap[parseInt(month) - 1];
+    const star = starMap[parseInt(month)-1];
     const elementIdx = "火水木金土".indexOf(wuxing);
     const element = elementMap[elementIdx % 4] || '未知';
-
     const data = {
       zodiac, star, wuxing, element,
       advice: energyDB.advice[wuxing] || '通用建議：多冥想平衡能量',
@@ -285,41 +248,36 @@
       crystal: energyDB.crystal[wuxing] || '白水晶',
       cleanse: energyDB.cleanse[wuxing] || '深呼吸放鬆'
     };
-
-    console.log('能量資料：', data); // Debug
     const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = texts[currentLang].resultTemplate(data);
     resultDiv.style.display = 'block';
-    resultDiv.scrollIntoView({ behavior: 'smooth' }); // 自動滾動到結果
+    resultDiv.scrollIntoView({ behavior: 'smooth' });
   }
 
-  // 許願牆
-let wishCount = parseInt(localStorage.getItem('wishCount')) || 0;
-document.getElementById('energyCount').textContent = wishCount;
-
-function addWish() {
-  const text = document.getElementById('wishText').value.trim();
-  if (!text) {
-    alert(currentLang === 'zh' ? "請輸入願望內容！" : "Please enter your wish!");
-    return;
-  }
-
-  const list = document.getElementById('wishList');
-  const div = document.createElement('div');
-  div.className = 'wish';
-  div.textContent = text;
-
-  list.insertBefore(div, list.firstChild);
-
-  document.getElementById('wishText').value = '';
-  wishCount++;
+  // ✅ 修復後的許願功能
+  let wishCount = parseInt(localStorage.getItem('wishCount')) || 0;
   document.getElementById('energyCount').textContent = wishCount;
-  localStorage.setItem('wishCount', wishCount);
 
-  if (wishCount % 1000 === 0) {
-    alert(🎉 能量達 ${wishCount}！我們將為地球種下 ${wishCount/1000} 棵樹！);
+  function addWish() {
+    const text = document.getElementById('wishText').value.trim();
+    if (!text) {
+      alert(currentLang === 'zh' ? "請輸入願望內容！" : "Please enter your wish!");
+      return;
+    }
+    const list = document.getElementById('wishList');
+    const div = document.createElement('div');
+    div.className = 'wish';
+    div.textContent = text;
+    list.insertBefore(div, list.firstChild);
+    document.getElementById('wishText').value = '';
+    wishCount++;
+    document.getElementById('energyCount').textContent = wishCount;
+    localStorage.setItem('wishCount', wishCount);
+    if (wishCount % 1000 === 0) {
+      alert(🎉 能量達 ${wishCount}！我們將為地球種下 ${wishCount/1000} 棵樹！);
+    }
   }
-}
+
   // 分享
   function share(platform) {
     const url = encodeURIComponent(window.location.href);
@@ -332,16 +290,8 @@ function addWish() {
     window.open(links[platform], '_blank');
   }
 
-  // 進入動畫
-  setTimeout(() => {
-    document.querySelector('.engine').style.animation = 'fadeIn 1s';
-  }, 500);
-
-  // 初始化：載入計數
-  console.log('網站載入完成，能量指數：' + wishCount);
+  console.log('能量宇宙已啟動 🌌');
 </script>
 
 </body>
 </html>
-
-
