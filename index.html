@@ -1,308 +1,153 @@
 <!DOCTYPE html>
-<html lang="zh-HK">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="全球能量玄學站：生肖星座五行四元素配對，流年運勢，顏色數字開運，除負能量方法" />
-  <meta name="keywords" content="能量療癒,2026流年運勢,生肖星座配對,五行缺什麼,除負能量,數字改運,顏色開運,月相許願,靈性測驗">
-  <title>能量宇宙 Energy Cosmos</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #5e3a8c;
-      --gold: #d4af37;
-      --light: #f9f5ff;
-      --dark: #2d1a4e;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Noto Sans TC', sans-serif;
-      background: linear-gradient(135deg, #1a0b2e, #2d1a4e);
-      color: #eee;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    .energy-bg {
-      position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1;
-      background: radial-gradient(circle at 20% 80%, #5e3a8c33 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, #d4af3733 0%, transparent 50%);
-      animation: pulse 8s infinite alternate;
-    }
-    @keyframes pulse { 0%{opacity:0.6} 100%{opacity:1} }
-
-    header {
-      text-align:center; padding:2rem 1rem; background:rgba(0,0,0,0.3);
-      position: relative;
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem; color:var(--gold); text-shadow:0 0 10px #d4af37aa;
-    }
-    .lang-switch { position:absolute; top:1rem; right:1rem; }
-    .lang-switch button {
-      background:none; border:none; color:#fff; font-size:1.2rem; cursor:pointer; margin:0 0.5rem;
-    }
-
-    .container { max-width:1000px; margin:2rem auto; padding:0 1rem; }
-
-    .engine {
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
-      border-radius: 20px; padding:2rem; margin-bottom:2rem; text-align:center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-    select, input, button {
-      padding:0.8rem; margin:0.5rem; border-radius:10px; border:none; font-size:1rem;
-    }
-    select, input { background:#fff; color:#333; }
-    button {
-      background: var(--gold); color:#000; font-weight:bold; cursor:pointer;
-      transition:0.3s; box-shadow:0 5px 15px rgba(212,175,55,0.4);
-    }
-    button:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(212,175,55,0.6); }
-
-    .result {
-      margin-top:1.5rem; padding:1.5rem; background:rgba(212,175,55,0.2);
-      border-radius:15px; display:none; animation:fadeIn 1s forwards;
-    }
-    @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:none;} }
-
-    .wish-wall {
-      background:rgba(255,255,255,0.1); backdrop-filter:blur(10px);
-      border-radius:20px; padding:2rem; text-align:center;
-    }
-    .wish-input { width:70%; padding:0.8rem; border-radius:10px; }
-    .wish-btn { background:#ff6b9d; color:white; }
-    .wishes { margin-top:1rem; max-height:300px; overflow-y:auto; }
-    .wish { 
-      background:rgba(255,255,255,0.2); margin:0.5rem 0; padding:0.8rem; 
-      border-radius:12px; font-size:0.9rem; animation:pop 0.5s;
-    }
-    @keyframes pop { from{transform:scale(0.8); opacity:0;} to{transform:scale(1); opacity:1;} }
-
-    .share-btns { text-align:center; margin:2rem 0; }
-    .share-btns button {
-      background:#1877f2; margin:0 0.5rem; color:white;
-    }
-    .share-btns button:nth-child(2) { background:#1da1f2; }
-    .share-btns button:nth-child(3) { background:#25d366; }
-
-    footer {
-      text-align:center; padding:2rem; color:#aaa; font-size:0.9rem;
-    }
-    .energy-count {
-      font-size:1.2rem; color:var(--gold); font-weight:bold;
-    }
-
-    @media (max-width:768px) {
-      h1 { font-size:2rem; }
-      .engine { padding:1.5rem; }
-      .wish-input { width:100%; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>能量宇宙 Energy Cosmos</title>
+<style>
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background: linear-gradient(160deg, #2b1055, #7597de);
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+select, input[type="text"], textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+}
+button {
+  background: #ff4da6;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:hover {
+  background: #ff70c2;
+}
+.result, .wishes {
+  background: rgba(255,255,255,0.15);
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: left;
+}
+footer {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #ddd;
+}
+</style>
 </head>
 <body>
 
-<div class="energy-bg"></div>
-
-<header>
-  <h1>能量宇宙 Energy Cosmos</h1>
-  <div class="lang-switch">
-    <button onclick="switchLang('zh')">中</button>
-    <button onclick="switchLang('en')">EN</button>
-  </div>
-</header>
-
 <div class="container">
+  <h1>🌌 能量宇宙 Energy Cosmos</h1>
+  <p>輸入你的生肖與出生月份，看看你的五行能量密碼 ✨</p>
 
-  <!-- 能量配對引擎 -->
-  <div class="engine">
-    <h2 id="engine-title">🌟 個人能量配對引擎</h2>
-    <p id="engine-desc">輸入生肖 + 出生月份，解鎖你的五行、星座、元素與開運密碼！</p>
-    
-    <select id="zodiac">
-      <option value="">選擇生肖</option>
-      <option value="鼠">🐭 鼠</option>
-      <option value="牛">🐂 牛</option>
-      <option value="虎">🐅 虎</option>
-      <option value="兔">🐇 兔</option>
-      <option value="龍">🐉 龍</option>
-      <option value="蛇">🐍 蛇</option>
-      <option value="馬">🐎 馬</option>
-      <option value="羊">🐑 羊</option>
-      <option value="猴">🐒 猴</option>
-      <option value="雞">🐓 雞</option>
-      <option value="狗">🐕 狗</option>
-      <option value="豬">🐖 豬</option>
+  <!-- 能量查詢表單 -->
+  <form method="get">
+    <label>選擇生肖：</label>
+    <select name="zodiac" required>
+      <option value="">-- 請選擇 --</option>
+      <option>鼠</option><option>牛</option><option>虎</option><option>兔</option>
+      <option>龍</option><option>蛇</option><option>馬</option><option>羊</option>
+      <option>猴</option><option>雞</option><option>狗</option><option>豬</option>
     </select>
 
-    <select id="month">
-      <option value="">出生月份</option>
-      <option value="1">1月</option>
-      <option value="2">2月</option>
-      <option value="3">3月</option>
-      <option value="4">4月</option>
-      <option value="5">5月</option>
-      <option value="6">6月</option>
-      <option value="7">7月</option>
-      <option value="8">8月</option>
-      <option value="9">9月</option>
-      <option value="10">10月</option>
-      <option value="11">11月</option>
-      <option value="12">12月</option>
+    <label>出生月份：</label>
+    <select name="month" required>
+      <option value="">-- 請選擇 --</option>
+      <option>1</option><option>2</option><option>3</option><option>4</option>
+      <option>5</option><option>6</option><option>7</option><option>8</option>
+      <option>9</option><option>10</option><option>11</option><option>12</option>
     </select>
 
-    <br/>
-    <button onclick="generateEnergy()">🔮 解鎖我的能量</button>
+    <button type="submit">🔮 解鎖能量密碼</button>
+  </form>
 
-    <div id="result" class="result"></div>
+  <!-- 結果區 -->
+  <div class="result">
+    <h2>你的能量結果：</h2>
+    <p>
+    <?php
+      $map = [
+        "鼠" => "水", "牛" => "土", "虎" => "木", "兔" => "木",
+        "龍" => "土", "蛇" => "火", "馬" => "火", "羊" => "土",
+        "猴" => "金", "雞" => "金", "狗" => "土", "豬" => "水"
+      ];
+      if (!empty($_GET['zodiac']) && !empty($_GET['month'])) {
+        $z = $_GET['zodiac'];
+        $m = intval($_GET['month']);
+        $wuxing = $map[$z];
+        $star = ["摩羯座","水瓶座","雙魚座","白羊座","金牛座","雙子座","巨蟹座","獅子座","處女座","天秤座","天蠍座","射手座"][$m-1];
+        echo "生肖：$z<br>五行：$wuxing<br>星座：$star<br>";
+
+        // 顯示簡易建議
+        $advice = [
+          "火" => "2026火旺年，宜穿綠色木衣，佩紅瑪瑙穩財運。",
+          "水" => "多親近大自然，喝黑豆水助運。",
+          "木" => "可佩紅色飾物，增加活力。",
+          "金" => "佩白水晶化煞，聲音淨化。",
+          "土" => "宜黃色系服飾，心境平和。"
+        ];
+        echo "<br><strong>流年建議：</strong>".$advice[$wuxing];
+      } else {
+        echo "請選擇上方選項後按『解鎖能量密碼』";
+      }
+    ?>
+    </p>
   </div>
 
-  <!-- 許願能量牆 -->
-  <div class="wish-wall">
-    <h2>🌍 全球許願能量牆</h2>
-    <p>每則許願 = 為地球種下一份正能量</p>
-    <input type="text" class="wish-input" placeholder="輸入你的感恩或願望..." id="wishText"/>
-    <button class="wish-btn" onclick="addWish()">💫 送出願望</button>
-    <div class="wishes" id="wishList"></div>
-    <p class="energy-count">目前能量指數：<span id="energyCount">0</span> / 1000</p>
+  <!-- 願望區 -->
+  <div class="wishes">
+    <h2>🪄 許願牆</h2>
+    <form method="post">
+      <input type="text" name="wish" placeholder="輸入你的願望..." required>
+      <button type="submit">💫 送出願望</button>
+    </form>
+
+    <?php
+      if (!empty($_POST['wish'])) {
+        $wish = htmlspecialchars($_POST['wish']);
+        file_put_contents("wishes.txt", $wish.PHP_EOL, FILE_APPEND);
+      }
+
+      if (file_exists("wishes.txt")) {
+        echo "<h3>最新願望：</h3><ul>";
+        $wishes = array_reverse(file("wishes.txt"));
+        foreach (array_slice($wishes, 0, 5) as $w) {
+          echo "<li>".htmlspecialchars($w)."</li>";
+        }
+        echo "</ul>";
+      }
+    ?>
   </div>
 
-  <!-- 分享按鈕 -->
-  <div class="share-btns">
-    <button onclick="share('facebook')">📘 分享到 Facebook</button>
-    <button onclick="share('twitter')">🐦 分享到 Twitter</button>
-    <button onclick="share('whatsapp')">💬 分享到 WhatsApp</button>
-  </div>
-
+  <footer>© 2025 Energy Cosmos. Powered by Light & Flow.</footer>
 </div>
-
-<footer>
-  © 2025 能量宇宙 | 每一次點擊，都是宇宙的回應
-</footer>
-<script>
-// 多語言
-const texts = {
-  zh: {
-    engineTitle: "🌟 個人能量配對引擎",
-    engineDesc: "輸入生肖 + 出生月份，解鎖你的五行、星座、元素與開運密碼！",
-    resultTemplate: (data) => `
-      <h3>✨ 你的能量密碼：${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
-      <p><strong>流年建議 (2026丙午年)：</strong> ${data.advice}</p>
-      <p>🎨 <strong>幸運色：</strong> ${data.color}</p>
-      <p>🔢 <strong>幸運數字：</strong> ${data.number}</p>
-      <p>💎 <strong>能量水晶：</strong> ${data.crystal}</p>
-      <p>🌱 <strong>除負能量法：</strong> ${data.cleanse}</p>
-    `
-  },
-  en: {
-    engineTitle: "🌟 Personal Energy Matching Engine",
-    engineDesc: "Enter your Chinese Zodiac + Birth Month to unlock your Five Elements, Constellation, Element & Luck Code!",
-    resultTemplate: (data) => `
-      <h3>✨ Your Energy Code: ${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
-      <p><strong>2026 Flow Year Advice:</strong> ${data.advice}</p>
-      <p>🎨 <strong>Lucky Color:</strong> ${data.color}</p>
-      <p>🔢 <strong>Lucky Number:</strong> ${data.number}</p>
-      <p>💎 <strong>Energy Crystal:</strong> ${data.crystal}</p>
-      <p>🌱 <strong>Clear Negative Energy:</strong> ${data.cleanse}</p>
-    `
-  }
-};
-
-let currentLang = 'zh';
-function switchLang(lang) {
-  currentLang = lang;
-  document.getElementById('engine-title').textContent = texts[lang].engineTitle;
-  document.getElementById('engine-desc').textContent = texts[lang].engineDesc;
-  const result = document.getElementById('result');
-  if (result.style.display === 'block') generateEnergy();
-}
-
-const wuxingMap = { 鼠: "水", 牛: "土", 虎: "木", 兔: "木", 龍: "土", 蛇: "火", 馬: "火", 羊: "土", 猴: "金", 雞: "金", 狗: "土", 豬: "水" };
-const starMap = ["摩羯座","水瓶座","雙魚座","白羊座","金牛座","雙子座","巨蟹座","獅子座","處女座","天秤座","天蠍座","射手座"];
-const elementMap = ["土","風","水","火"];
-const energyDB = {
-  advice:{火:"2026火旺年，宜穿綠色木衣，佩黃水晶穩財運",水:"補木生水，多去森林浴，喝黑豆水",木:"火年助木，宜紅色配飾，但忌過量",金:"火克金，佩黑曜石化煞，多喝湯水",土:"火生土，穩定年，宜黃色系"},
-  color:{火:"紅橙",水:"黑藍",木:"綠",金:"白金",土:"黃棕"},
-  number:{火:"3,8",水:"1,6",木:"3,4",金:"4,9",土:"2,5,8"},
-  crystal:{火:"紅瑪瑙",水:"黑曜石",木:"綠幽靈",金:"白水晶",土:"黃水晶"},
-  cleanse:{火:"點肉桂香薰，燒許願紙",水:"鹽水淨浴，每週一次",木:"艾草熏房，開窗透氣",金:"敲金屬鈴，聲音淨化",土:"放鹽燈，吸收濕氣負能"}
-};
-
-function generateEnergy() {
-  const zodiac = document.getElementById('zodiac').value;
-  const month = document.getElementById('month').value;
-  if (!zodiac || !month) {
-    alert(currentLang==='zh'?"請選擇生肖與出生月份！":"Please select zodiac and birth month!");
-    return;
-  }
-  const wuxing = wuxingMap[zodiac];
-  const star = starMap[parseInt(month)-1];
-  const elementIdx = "火水木金土".indexOf(wuxing);
-  const element = elementMap[elementIdx % 4] || '未知';
-  const data = {
-    zodiac, star, wuxing, element,
-    advice: energyDB.advice[wuxing] || '通用建議：多冥想平衡能量',
-    color: energyDB.color[wuxing] || '藍色',
-    number: energyDB.number[wuxing] || '1',
-    crystal: energyDB.crystal[wuxing] || '白水晶',
-    cleanse: energyDB.cleanse[wuxing] || '深呼吸放鬆'
-  };
-  const resultDiv = document.getElementById('result');
-  resultDiv.innerHTML = texts[currentLang].resultTemplate(data);
-  resultDiv.style.display = 'block';
-  resultDiv.scrollIntoView({ behavior: 'smooth' });
-}
-
-// ✅ 修復後的許願功能
-let wishCount = parseInt(localStorage.getItem('wishCount')) || 0;
-document.getElementById('energyCount').textContent = wishCount;
-
-function addWish() {
-  const text = document.getElementById('wishText').value.trim();
-  if (!text) {
-    alert(currentLang === 'zh' ? "請輸入願望內容！" : "Please enter your wish!");
-    return;
-  }
-
-  const list = document.getElementById('wishList');
-  const div = document.createElement('div');
-  div.className = 'wish';
-  div.textContent = text;
-  list.insertBefore(div, list.firstChild);
-
-  document.getElementById('wishText').value = '';
-  wishCount++;
-  document.getElementById('energyCount').textContent = wishCount;
-  localStorage.setItem('wishCount', wishCount);
-
-  if (wishCount % 1000 === 0) {
-    alert(🎉 能量達 ${wishCount}！我們將為地球種下 ${wishCount / 1000} 棵樹！);
-  }
-}
-
-// ✅ 分享功能修正
-function share(platform) {
-  const url = encodeURIComponent(window.location.href);
-  const text = encodeURIComponent(
-    currentLang === 'zh'
-      ? "我解鎖了個人能量密碼！你也來試試？🌟 能量宇宙"
-      : "I unlocked my energy code! Try it? 🌟 Energy Cosmos"
-  );
-  const links = {
-    facebook: https://www.facebook.com/sharer/sharer.php?u=${url},
-    twitter: https://twitter.com/intent/tweet?text=${text}&url=${url},
-    whatsapp: https://api.whatsapp.com/send?text=${text}%20${url}
-  };
-  window.open(links[platform], '_blank');
-}
-
-console.log('能量宇宙已啟動 🌌');
-</script>
-
 
 </body>
 </html>
-
-
-
-
