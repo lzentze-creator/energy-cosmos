@@ -115,23 +115,23 @@
 
   <!-- 能量配對引擎 -->
   <div class="engine">
-    <h2 id="engine-title">個人能量配對引擎</h2>
+    <h2 id="engine-title">🌟 個人能量配對引擎</h2>
     <p id="engine-desc">輸入生肖 + 出生月份，解鎖你的五行、星座、元素與開運密碼！</p>
     
     <select id="zodiac">
       <option value="">選擇生肖</option>
-      <option value="鼠">鼠</option>
-      <option value="牛">牛</option>
-      <option value="虎">虎</option>
-      <option value="兔">兔</option>
-      <option value="龍">龍</option>
-      <option value="蛇">蛇</option>
-      <option value="馬">馬</option>
-      <option value="羊">羊</option>
-      <option value="猴">猴</option>
-      <option value="雞">雞</option>
-      <option value="狗">狗</option>
-      <option value="豬">豬</option>
+      <option value="鼠">🐭 鼠</option>
+      <option value="牛">🐂 牛</option>
+      <option value="虎">🐅 虎</option>
+      <option value="兔">🐇 兔</option>
+      <option value="龍">🐉 龍</option>
+      <option value="蛇">🐍 蛇</option>
+      <option value="馬">🐎 馬</option>
+      <option value="羊">🐑 羊</option>
+      <option value="猴">🐒 猴</option>
+      <option value="雞">🐓 雞</option>
+      <option value="狗">🐕 狗</option>
+      <option value="豬">🐖 豬</option>
     </select>
 
     <select id="month">
@@ -151,26 +151,26 @@
     </select>
 
     <br/>
-    <button onclick="generateEnergy()">解鎖我的能量</button>
+    <button onclick="generateEnergy()">🔮 解鎖我的能量</button>
 
     <div id="result" class="result"></div>
   </div>
 
   <!-- 許願能量牆 -->
   <div class="wish-wall">
-    <h2>全球許願能量牆</h2>
+    <h2>🌍 全球許願能量牆</h2>
     <p>每則許願 = 為地球種下一份正能量</p>
     <input type="text" class="wish-input" placeholder="輸入你的感恩或願望..." id="wishText"/>
-    <button class="wish-btn" onclick="addWish()">送出願望</button>
+    <button class="wish-btn" onclick="addWish()">💫 送出願望</button>
     <div class="wishes" id="wishList"></div>
     <p class="energy-count">目前能量指數：<span id="energyCount">0</span> / 1000</p>
   </div>
 
   <!-- 分享按鈕 -->
   <div class="share-btns">
-    <button onclick="share('facebook')">分享到 Facebook</button>
-    <button onclick="share('twitter')">分享到 Twitter</button>
-    <button onclick="share('whatsapp')">分享到 WhatsApp</button>
+    <button onclick="share('facebook')">📘 分享到 Facebook</button>
+    <button onclick="share('twitter')">🐦 分享到 Twitter</button>
+    <button onclick="share('whatsapp')">💬 分享到 WhatsApp</button>
   </div>
 
 </div>
@@ -180,30 +180,36 @@
 </footer>
 
 <script>
-  // 多語言
+  // 錯誤處理：確保 JS 正常載入
+  window.onerror = function(msg, url, line) {
+    console.error('JS Error: ' + msg + ' at line ' + line);
+    alert('偵測到小錯誤，請重新載入頁面！');
+  };
+
+  // 多語言（修正：加 emoji 到模板，避免渲染問題）
   const texts = {
     zh: {
-      engineTitle: "個人能量配對引擎",
+      engineTitle: "🌟 個人能量配對引擎",
       engineDesc: "輸入生肖 + 出生月份，解鎖你的五行、星座、元素與開運密碼！",
       resultTemplate: (data) => `
-        <h3>你的能量密碼：${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
+        <h3>✨ 你的能量密碼：${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
         <p><strong>流年建議 (2026丙午年)：</strong> ${data.advice}</p>
-        <p><strong>幸運色：</strong> ${data.color}</p>
-        <p><strong>幸運數字：</strong> ${data.number}</p>
-        <p><strong>能量水晶：</strong> ${data.crystal}</p>
-        <p><strong>除負能量法：</strong> ${data.cleanse}</p>
+        <p>🎨 <strong>幸運色：</strong> ${data.color}</p>
+        <p>🔢 <strong>幸運數字：</strong> ${data.number}</p>
+        <p>💎 <strong>能量水晶：</strong> ${data.crystal}</p>
+        <p>🌱 <strong>除負能量法：</strong> ${data.cleanse}</p>
       `
     },
     en: {
-      engineTitle: "Personal Energy Matching Engine",
+      engineTitle: "🌟 Personal Energy Matching Engine",
       engineDesc: "Enter your Chinese Zodiac + Birth Month to unlock your Five Elements, Constellation, Element & Luck Code!",
       resultTemplate: (data) => `
-        <h3>Your Energy Code: ${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
+        <h3>✨ Your Energy Code: ${data.zodiac}・${data.star}・${data.wuxing}・${data.element}</h3>
         <p><strong>2026 Flow Year Advice:</strong> ${data.advice}</p>
-        <p><strong>Lucky Color:</strong> ${data.color}</p>
-        <p><strong>Lucky Number:</strong> ${data.number}</p>
-        <p><strong>Energy Crystal:</strong> ${data.crystal}</p>
-        <p><strong>Clear Negative Energy:</strong> ${data.cleanse}</p>
+        <p>🎨 <strong>Lucky Color:</strong> ${data.color}</p>
+        <p>🔢 <strong>Lucky Number:</strong> ${data.number}</p>
+        <p>💎 <strong>Energy Crystal:</strong> ${data.crystal}</p>
+        <p>🌱 <strong>Clear Negative Energy:</strong> ${data.cleanse}</p>
       `
     }
   };
@@ -214,7 +220,7 @@
     document.getElementById('engine-title').textContent = texts[lang].engineTitle;
     document.getElementById('engine-desc').textContent = texts[lang].engineDesc;
     const result = document.getElementById('result');
-    if (result.style.display === 'block') generateEnergy();
+    if (result.style.display === 'block') generateEnergy(); // 重新生成結果
   }
 
   // 生肖對應五行
@@ -231,7 +237,6 @@
 
   // 四元素
   const elementMap = ["土", "風", "水", "火"];
-  const elementCycle = ["土", "金", "水", "木", "火"];
 
   // 能量資料庫
   const energyDB = {
@@ -255,6 +260,7 @@
   };
 
   function generateEnergy() {
+    console.log('生成能量中...'); // Debug 日誌
     const zodiac = document.getElementById('zodiac').value;
     const month = document.getElementById('month').value;
     if (!zodiac || !month) {
@@ -263,48 +269,60 @@
     }
 
     const wuxing = wuxingMap[zodiac];
-    const star = starMap[month-1];
+    if (!wuxing) {
+      alert('生肖資料錯誤，請重新選擇！');
+      return;
+    }
+    const star = starMap[parseInt(month) - 1];
     const elementIdx = "火水木金土".indexOf(wuxing);
-    const element = elementMap[elementIdx % 4];
+    const element = elementMap[elementIdx % 4] || '未知';
 
     const data = {
       zodiac, star, wuxing, element,
-      advice: energyDB.advice[wuxing],
-      color: energyDB.color[wuxing],
-      number: energyDB.number[wuxing],
-      crystal: energyDB.crystal[wuxing],
-      cleanse: energyDB.cleanse[wuxing]
+      advice: energyDB.advice[wuxing] || '通用建議：多冥想平衡能量',
+      color: energyDB.color[wuxing] || '藍色',
+      number: energyDB.number[wuxing] || '1',
+      crystal: energyDB.crystal[wuxing] || '白水晶',
+      cleanse: energyDB.cleanse[wuxing] || '深呼吸放鬆'
     };
 
-    document.getElementById('result').innerHTML = texts[currentLang].resultTemplate(data);
-    document.getElementById('result').style.display = 'block';
+    console.log('能量資料：', data); // Debug
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = texts[currentLang].resultTemplate(data);
+    resultDiv.style.display = 'block';
+    resultDiv.scrollIntoView({ behavior: 'smooth' }); // 自動滾動到結果
   }
 
   // 許願牆
-  let wishCount = 0;
+  let wishCount = localStorage.getItem('wishCount') || 0; // 記住計數
+  document.getElementById('energyCount').textContent = wishCount;
   function addWish() {
     const text = document.getElementById('wishText').value.trim();
-    if (!text) return;
+    if (!text) {
+      alert('請輸入願望！');
+      return;
+    }
 
     const list = document.getElementById('wishList');
     const div = document.createElement('div');
     div.className = 'wish';
-    div.textContent = ${text};
+    div.innerHTML = 🌟 ${text}; // 用 innerHTML 加 emoji
     list.insertBefore(div, list.firstChild);
 
     document.getElementById('wishText').value = '';
     wishCount++;
     document.getElementById('energyCount').textContent = wishCount;
+    localStorage.setItem('wishCount', wishCount);
 
     if (wishCount % 1000 === 0) {
-      alert(能量達 ${wishCount}！我們將為地球種下 ${wishCount/1000} 棵樹！);
+      alert(🎉 能量達 ${wishCount}！我們將為地球種下 ${wishCount/1000} 棵樹！);
     }
   }
 
   // 分享
   function share(platform) {
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent("我解鎖了個人能量密碼！你也來試試？能量宇宙");
+    const text = encodeURIComponent(currentLang === 'zh' ? "我解鎖了個人能量密碼！你也來試試？🌟 能量宇宙" : "I unlocked my energy code! Try it? 🌟 Energy Cosmos");
     const links = {
       facebook: https://www.facebook.com/sharer/sharer.php?u=${url},
       twitter: https://twitter.com/intent/tweet?text=${text}&url=${url},
@@ -317,7 +335,10 @@
   setTimeout(() => {
     document.querySelector('.engine').style.animation = 'fadeIn 1s';
   }, 500);
+
+  // 初始化：載入計數
+  console.log('網站載入完成，能量指數：' + wishCount);
 </script>
 
 </body>
-</html>
+</html
